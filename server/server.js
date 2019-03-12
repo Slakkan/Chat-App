@@ -19,9 +19,10 @@ io.on('connect', function(socket) {
 
     socket.broadcast.emit('newMessage', generateMessage('Server', 'New user joined the chat'))
 
-    socket.on('createMessage', function(message) {
+    socket.on('createMessage', function(message, callback) {
         console.log(`${message.user}: ${message.text}`)
         io.emit('newMessage', generateMessage(message.user, message.text))
+        callback('This is from the server')
     })
 
     socket.on('disconnect', function() {

@@ -10,5 +10,19 @@ socket.on('disconnect', () => {
 })
 
 socket.on('newMessage', function(message) {
-    console.log(`${message.user}: ${message.text} | sent at ${message.createdAt}`)
+    const li = jQuery('<li></li>')
+    li.text(`${message.user}: ${message.text} | sent at ${message.createdAt}`)
+    jQuery('#messages').append(li)
+})
+
+
+jQuery('#message-form').on('submit', function (e) {
+    e.preventDefault()
+
+    socket.emit('createMessage', {
+        user: 'Lisandro',
+        text: jQuery('[name=message]').val()
+    }, function() {
+
+    })
 })
