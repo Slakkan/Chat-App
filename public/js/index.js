@@ -11,18 +11,24 @@ socket.on('disconnect', () => {
 
 socket.on('newMessage', function(message) {
     const li = jQuery('<li></li>')
-    li.text(`${message.user}: ${message.text} | sent at ${message.createdAt}`)
+    const timeSent = moment(message.createdAt).format("H:mm")
+    li.text(`${message.user}: ${message.text} | sent at ${timeSent}`)
     jQuery('#messages').append(li)
 })
 
 socket.on('newLocationMessage', function(message) {
     const li = jQuery('<li></li>')
     const a = jQuery('<a target="_blank">My current location</a>')
+    const sentLabel = jQuery('<label></label>')
+    const timeSent = moment(message.createdAt).format("H:mm")
 
+    sentLabel.text(` | sent at ${timeSent}`)
     li.text(`${message.user}: `)
     a.attr('href', message.url)
     li.append(a)
+    li.append(sentLabel)
     jQuery('#messages').append(li)
+    
 })
 
 jQuery('#message-form').on('submit', function (e) {
