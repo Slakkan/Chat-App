@@ -10,5 +10,5 @@ socket.on('disconnect', () => {
 })
 
 socket.on('newMessage', function(message) {
-    console.log(`${message.from}: ${message.text} | sent at ${message.createdAt}`)
+    console.log(`${message.user}: ${message.text} | sent at ${message.createdAt}`)
 })
