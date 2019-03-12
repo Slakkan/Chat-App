@@ -16,9 +16,11 @@ io.on('connect', function(socket) {
 
     socket.on('createMessage', function(message) {
         console.log(`${message.from}: ${message.text}`)
-        date = new Date()
-        message.createdAt = date.toTimeString()
-        socket.emit('newMessage', message)
+        io.emit('newMessage', {
+            from: message.from,
+            text:message.text,
+            createdAt: new Date().getTime()
+        })
     })
 
     socket.on('disconnect', function() {
