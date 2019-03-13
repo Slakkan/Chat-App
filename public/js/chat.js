@@ -75,7 +75,6 @@ jQuery('#message-form').on('submit', function (e) {
     const messageTextbox = jQuery('[name=message]')
 
     socket.emit('createMessage', {
-        user: 'Lisandro',
         text: messageTextbox.val()
     }, function() {
         messageTextbox.val('')
